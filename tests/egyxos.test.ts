@@ -20,7 +20,7 @@ beforeEach(() => {
   process.env.EGYXOS_STORAGE = temp;
 });
 
-describe("EGYXOS Red Team core behaviors", () => {
+describe("Egyxos Advanced Web Security Scanner core behaviors", () => {
   it("creates a project and enforces scope", () => {
     const project = createProject("demo");
     addScope("example.com", "demo");

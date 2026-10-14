@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="EGYXOS Red Team"
+APP_NAME="Egyxos Advanced Web Security Scanner"
 
 say() {
   printf '[egyxos] %s\n' "$1"
@@ -25,7 +25,7 @@ if [[ "$node_major" -lt 20 ]]; then
 fi
 
 if [[ ! -f "package.json" || ! -f "tsconfig.json" ]]; then
-  fail "Run this script from the EGYXOS Red Team repository root."
+  fail "Run this script from the Egyxos Advanced Web Security Scanner repository root."
 fi
 
 say "Installing JavaScript dependencies"
