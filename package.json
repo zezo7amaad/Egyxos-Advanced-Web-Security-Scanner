@@ -1,7 +1,7 @@
 {
   "name": "@egyxos/redteam",
   "version": "0.1.0",
-  "description": "EGYXOS Red Team — AI-Assisted Security Assessment Platform",
+  "description": "Egyxos Advanced Web Security Scanner — AI-Assisted Security Assessment Platform",
   "type": "module",
   "bin": {
     "egyxos-redteam": "dist/index.js"

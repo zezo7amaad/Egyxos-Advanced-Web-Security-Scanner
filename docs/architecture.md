@@ -1,8 +1,8 @@
-# EGYXOS Red Team Architecture
+# Egyxos Advanced Web Security Scanner Architecture
 
 ## Overview
 
-EGYXOS Red Team is designed as a modular security-assessment platform with explicit safety boundaries. The system keeps a human in the loop and separates project, scope, tool execution, and evidence into distinct architectural layers.
+Egyxos Advanced Web Security Scanner is designed as a modular security-assessment platform with explicit safety boundaries. The system keeps a human in the loop and separates project, scope, tool execution, and evidence into distinct architectural layers.
 
 ## Components
 

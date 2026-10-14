@@ -2,7 +2,7 @@ import type { Finding } from "./types.js";
 
 export function renderMarkdownReport(findings: Finding[]): string {
   const lines: string[] = [
-    "# EGYXOS Red Team Report",
+    "# Egyxos Advanced Web Security Scanner Report",
     "",
     "## Executive Summary",
     "",
@@ -41,7 +41,7 @@ export function renderMarkdownReport(findings: Finding[]): string {
 }
 
 export function renderJsonReport(findings: Finding[]): string {
-  return JSON.stringify({ report: "EGYXOS Red Team", findings }, null, 2);
+  return JSON.stringify({ report: "Egyxos Advanced Web Security Scanner", findings }, null, 2);
 }
 
 export function renderHtmlReport(findings: Finding[]): string {
@@ -62,7 +62,7 @@ export function renderHtmlReport(findings: Finding[]): string {
     )
     .join("\n");
 
-  return `<!doctype html><html><head><meta charset="UTF-8"><title>EGYXOS Red Team Report</title></head><body><h1>EGYXOS Red Team</h1>${items}</body></html>`;
+  return `<!doctype html><html><head><meta charset="UTF-8"><title>Egyxos Advanced Web Security Scanner Report</title></head><body><h1>Egyxos Advanced Web Security Scanner</h1>${items}</body></html>`;
 }
 
 export function generateReport(findings: Finding[], format: "markdown" | "html" | "json" = "markdown"): string {

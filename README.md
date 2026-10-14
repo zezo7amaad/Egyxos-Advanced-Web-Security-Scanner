@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="assets/egyxos_pyramid_sword_transparent.png" alt="EGYXOS Red Team logo" width="320">
+  <img src="assets/egyxos_pyramid_sword_transparent.png" alt="Egyxos Advanced Web Security Scanner logo" width="320">
 </p>
 
-# EGYXOS Red Team
+# Egyxos Advanced Web Security Scanner
 
-EGYXOS Red Team is an AI-assisted security assessment platform designed for authorized security testing and evidence-driven review. It combines project management, human approval boundaries, scope enforcement, tool orchestration, findings tracking, and reporting in a single command-line experience.
+Egyxos Advanced Web Security Scanner is an AI-assisted security assessment platform designed for authorized security testing and evidence-driven review. It combines project management, human approval boundaries, scope enforcement, tool orchestration, findings tracking, and reporting in a single command-line experience.
 
-## What is EGYXOS Red Team?
+## What is Egyxos Advanced Web Security Scanner?
 
-EGYXOS Red Team helps teams run structured red-team and security assessment workflows against approved targets while preserving strict safety boundaries. The platform keeps a human in the loop for sensitive actions, stores evidence in a local-first database, and produces shareable reports with technical findings and remediation guidance.
+Egyxos Advanced Web Security Scanner helps teams run structured red-team and security assessment workflows against approved targets while preserving strict safety boundaries. The platform keeps a human in the loop for sensitive actions, stores evidence in a local-first database, and produces shareable reports with technical findings and remediation guidance.
 
 ## Features
 
@@ -137,7 +137,7 @@ Sessions capture the current assessment objective, target, tool activity, approv
 
 ## Reconnaissance
 
-EGYXOS Red Team includes a framework for recon tasks such as service discovery, URL enumeration, technology detection, subdomain discovery, and API discovery through adapters.
+Egyxos Advanced Web Security Scanner includes a framework for recon tasks such as service discovery, URL enumeration, technology detection, subdomain discovery, and API discovery through adapters.
 
 Preview a passive subdomain discovery action:
 
@@ -438,7 +438,7 @@ Reports can be generated in Markdown, HTML, and JSON. The report engine summariz
 
 ## Configuration
 
-EGYXOS Red Team stores configuration under the local user directory:
+Egyxos Advanced Web Security Scanner stores configuration under the local user directory:
 
 ```text
 ~/.egyxos-redteam/config.json

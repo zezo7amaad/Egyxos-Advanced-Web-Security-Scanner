@@ -20,7 +20,7 @@ import { GeminiProvider } from "./ai.js";
 
 function printHeader(): void {
   console.log("╔══════════════════════════════════════════════╗");
-  console.log("║              EGYXOS RED TEAM               ║");
+  console.log("║   Egyxos Advanced Web Security Scanner     ║");
   console.log("║       AI Security Assessment Platform      ║");
   console.log("╚══════════════════════════════════════════════╝");
 }
@@ -233,7 +233,7 @@ async function handleAIScan(skill: string | undefined, args: string[]): Promise<
     const reportDir = path.join(resolveStoragePath(), "reports");
     fs.mkdirSync(reportDir, { recursive: true });
     const reportPath = path.join(reportDir, `ai-scan-${Date.now()}.md`);
-    fs.writeFileSync(reportPath, `# EGYXOS AI Security Assessment\n\nTarget: ${output.target}\n\n${response.text}\n`);
+    fs.writeFileSync(reportPath, `# Egyxos Advanced Web Security Scanner AI Security Assessment\n\nTarget: ${output.target}\n\n${response.text}\n`);
     console.log(`AI assessment written to ${reportPath}`);
   } catch (error) {
     console.error(error instanceof Error ? error.message : "Authorized scan failed.");
@@ -243,7 +243,7 @@ async function handleAIScan(skill: string | undefined, args: string[]): Promise<
 
 function handleDoctor(): void {
   const result = runDoctor();
-  console.log("EGYXOS Red Team Doctor");
+  console.log("Egyxos Advanced Web Security Scanner Doctor");
   for (const check of result.checks) {
     console.log(`${check.ok ? "✓" : "!"} ${check.name}: ${check.details}`);
   }
@@ -269,7 +269,7 @@ async function interactiveShell(): Promise<void> {
     }
 
     if (raw.toLowerCase() === "initialize assessment") {
-      console.log("EGYXOS: Target identified.");
+      console.log("Egyxos Advanced Web Security Scanner: Target identified.");
       console.log("Scope: example.com");
       console.log("Proposed plan:");
       console.log("[1] Passive reconnaissance");
