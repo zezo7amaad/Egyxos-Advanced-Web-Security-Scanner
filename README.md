@@ -6,6 +6,94 @@
 
 Egyxos Advanced Web Security Scanner is an AI-assisted security assessment platform designed for authorized security testing and evidence-driven review. It combines project management, human approval boundaries, scope enforcement, tool orchestration, findings tracking, and reporting in a single command-line experience.
 
+## TM471-A graduation project platform
+
+This repository now includes the Python 3.11+ FastAPI platform specified by the
+TM471-A proposal, **"Egyxos: An AI-Assisted Web Reconnaissance and Vulnerability
+Assessment Platform"**. The implementation keeps the original TypeScript CLI
+available, while the academic platform lives under `app/`.
+
+The four-stage workflow is:
+
+1. Scope validation against an explicit allowlist
+2. Subdomain discovery with `subfinder`
+3. Live-host and technology probing with `httpx`
+4. Vulnerability scanning with `nuclei`, paused behind an approval gate
+
+```mermaid
+flowchart LR
+  Scope[Authorized scope] --> Gate{Scope validation}
+  Gate -->|allowed| Plan[Scan session]
+  Gate -->|blocked| Audit[Immutable audit event]
+  Plan --> Approval{Nuclei or active mode?}
+  Approval -->|pending| Human[Operator approval]
+  Human --> Pipeline[subfinder -> httpx -> nuclei]
+  Approval -->|not required| Pipeline
+  Pipeline --> Normalize[Unified findings]
+  Normalize --> AI[Gemini/Ollama or deterministic fallback]
+  AI --> Reports[Markdown / HTML / JSON]
+  Normalize --> Dashboard[FastAPI dashboard]
+```
+
+### Run the FastAPI platform locally
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Open `http://127.0.0.1:8000`. The dashboard is pre-populated with a local
+evaluation workflow, but it does not claim that a scan ran. Missing external
+security binaries use safe demo-mode observations. Set `DEMO_MODE=false` to
+disable that fallback.
+
+Configuration is read from environment variables or `.env`:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `DATABASE_URL` | `sqlite:///./egyxos.db` | SQLite or PostgreSQL SQLAlchemy URL |
+| `LAB_MODE` | `true` | Identifies local evaluation mode |
+| `DEMO_MODE` | `true` | Safe fallback when security binaries are unavailable |
+| `GEMINI_API_KEY` | unset | Optional Gemini triage provider |
+| `GEMINI_MODEL` | `gemini-2.0-flash` | Gemini model |
+| `OLLAMA_URL` | unset | Optional local Ollama endpoint |
+| `OLLAMA_MODEL` | `llama3.2` | Ollama model |
+| `REPORTS_DIR` | `reports` | Generated report directory |
+
+Without an AI provider, the deterministic analyzer labels evidence conservatively
+for reproducible tests. AI output is always reported separately from raw evidence.
+
+### Local evaluation lab
+
+The compose file binds every service to loopback only:
+
+```bash
+docker compose up --build
+```
+
+- Egyxos API and dashboard: `http://127.0.0.1:8000`
+- OWASP Juice Shop: `http://127.0.0.1:3000`
+- DVWA: `http://127.0.0.1:8080`
+
+Use only these local containers for evaluation unless you have separate written
+authorization for another target.
+
+### Verification
+
+```bash
+pytest -v
+```
+
+The pytest suite covers out-of-scope blocking and audit logging, approval gates,
+demo-mode pipeline execution, AI triage persistence, and all three report formats.
+
+The API reference is in [`docs/dashboard-api.md`](docs/dashboard-api.md). The
+FastAPI routes are versioned under `/api/v1`, including `/api/v1/scopes`,
+`/api/v1/scans`, `/api/v1/findings`, `/api/v1/audit`, and
+`/api/v1/reports/{scan_id}`.
+
 ## What is Egyxos Advanced Web Security Scanner?
 
 Egyxos Advanced Web Security Scanner helps teams run structured red-team and security assessment workflows against approved targets while preserving strict safety boundaries. The platform keeps a human in the loop for sensitive actions, stores evidence in a local-first database, and produces shareable reports with technical findings and remediation guidance.
@@ -482,6 +570,30 @@ npm install
 npm run build
 npm test
 ```
+
+## Dashboard preview
+
+The repository includes a static operations dashboard in `dashboard/` for reviewing
+sample assessment data, findings, evidence quality, scan state, recent activity, and
+authorization scope. Open `dashboard/index.html` in a browser to preview it. All
+records are explicitly marked as sample data; the preview does not execute scans or
+imply that any target has been tested.
+
+## Dashboard server
+
+The dashboard can also run with the filesystem-backed API and protected login flow:
+
+```bash
+npm run build
+npm run dashboard
+```
+
+Then open `http://localhost:4173`. Configure `EGYXOS_DASHBOARD_USERS_JSON` with
+scrypt password hashes before signing in. The complete endpoint list, role model,
+cookie/CSRF behavior, and authentication setup are documented in
+[`docs/dashboard-api.md`](docs/dashboard-api.md). Without configured users, the
+server intentionally shows an authentication configuration error instead of
+providing a decorative or unprotected login.
 
 ## Testing
 
