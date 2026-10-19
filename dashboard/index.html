@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Evidence-driven security assessment dashboard for authorized teams."
+    />
+    <title>Egyxos Advanced Web Security Scanner | Operations dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="login-screen" id="login-screen">
+      <div class="login-panel">
+        <div class="login-brand"><span class="login-logo"><img src="logo.svg" alt="Egyxos logo" /></span><div><strong>Egyxos</strong><span>Advanced Web Security Scanner</span></div></div>
+        <div class="login-copy"><span class="eyebrow">Authorized security operations</span><h1>Review what matters.<br /><em>Prove what you know.</em></h1><p>Sign in to review scope-aware assessments, evidence, approvals, and reports.</p></div>
+        <form id="login-form" novalidate>
+          <label for="login-username">Email or username</label>
+          <input id="login-username" name="username" autocomplete="username" required />
+          <label for="login-password">Password</label>
+          <div class="password-field"><input id="login-password" name="password" type="password" autocomplete="current-password" required /><button type="button" id="toggle-password" aria-label="Show password">Show</button></div>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+          <button class="button button-primary login-button" type="submit"><span>Sign in securely</span><span class="login-spinner" hidden></span></button>
+        </form>
+        <p class="login-note"><span class="status-dot good"></span> Sessions are protected with HttpOnly cookies. Written authorization and scope validation remain required for every assessment.</p>
+      </div>
+      <div class="login-aside"><div class="aside-grid"></div><span class="eyebrow">Evidence-driven by design</span><h2>Every observation has a confidence level.</h2><p>Keep verified evidence, AI triage, and analyst decisions separate so teams can act with clarity.</p><div class="aside-stat"><strong>100%</strong><span>scope-aware workflows</span></div></div>
+    </section>
+    <div class="app-shell" id="app-shell" hidden>
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark"><img src="logo.svg" alt="" /></div>
+          <div>
+            <strong>Egyxos</strong>
+            <span>Security Scanner</span>
+          </div>
+        </div>
+
+        <div class="workspace-switcher">
+          <span class="eyebrow">Active workspace</span>
+          <button class="workspace-button" type="button">
+            <span><strong>Acme security review</strong><small>Production program</small></span>
+            <span aria-hidden="true">⌄</span>
+          </button>
+        </div>
+
+        <nav class="nav-list">
+          <a class="nav-item active" href="#overview"><span>⌂</span>Overview</a>
+          <a class="nav-item" href="#assessments"><span>◷</span>Assessments</a>
+          <a class="nav-item" href="#findings"><span>◆</span>Findings <b>12</b></a>
+          <a class="nav-item" href="#activity"><span>↯</span>Activity</a>
+          <a class="nav-item" href="#scope"><span>◎</span>Scope &amp; access</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="authorization-badge">
+            <span class="status-dot good"></span>
+            <div><strong>Authorization active</strong><small>Scope validated 2h ago</small></div>
+          </div>
+          <button class="help-link" type="button">? <span>Documentation</span></button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">Security operations</span>
+            <h1>Assessment overview</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="sample-chip"><span class="status-dot"></span>Sample data</span>
+            <button class="icon-button" type="button" aria-label="Notifications">♢<span class="notification-dot"></span></button>
+            <div class="avatar" id="user-avatar" aria-label="Signed-in user"></div>
+            <button class="sign-out-button" type="button" id="sign-out">Sign out</button>
+          </div>
+        </header>
+
+        <div class="notice-bar">
+          <span class="notice-icon">i</span>
+          <span><strong>Evidence-first review:</strong> sample records are clearly labeled. Only written authorization, validated scope, and explicit approval permit testing.</span>
+          <button type="button" class="dismiss-notice" aria-label="Dismiss notice">×</button>
+        </div>
+
+        <section id="overview" class="content-section">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Workspace pulse</span>
+              <h2>What needs your attention</h2>
+            </div>
+            <button class="button button-secondary" type="button">Export summary <span>↓</span></button>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <div class="metric-icon blue">◫</div>
+              <div><span class="metric-label">Active projects</span><strong>04</strong><span class="metric-change positive">+1 this month</span></div>
+              <span class="metric-spark blue-spark">╱╲╱╱</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-icon violet">◷</div>
+              <div><span class="metric-label">Recent scans</span><strong>18</strong><span class="metric-change positive">+24% vs last period</span></div>
+              <span class="metric-spark violet-spark">╲╱╲╱</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-icon amber">◆</div>
+              <div><span class="metric-label">Open findings</span><strong>12</strong><span class="metric-change warning">3 high severity</span></div>
+              <span class="metric-spark amber-spark">╱╱╲╱</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-icon red">!</div>
+              <div><span class="metric-label">Needs review</span><strong>05</strong><span class="metric-change danger">Requires analyst action</span></div>
+              <span class="metric-spark red-spark">╲╱╱╲</span>
+            </article>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+          <section id="assessments" class="panel assessments-panel">
+            <div class="panel-heading">
+              <div><span class="eyebrow">Assessment activity</span><h2>Recent assessments</h2></div>
+              <a class="text-link" href="#assessments">View all <span>→</span></a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Project / target</th><th>Scan date</th><th>Status</th><th>Findings</th><th>Report</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Acme production</strong><span class="table-subtext">app.acme.test</span></td>
+                    <td>Oct 14, 2026<span class="table-subtext">09:42 UTC</span></td>
+                    <td><span class="status-pill complete"><span class="status-dot"></span>Completed</span></td>
+                    <td><strong>08</strong><span class="table-subtext">2 high</span></td>
+                    <td><button class="report-button" type="button" data-report="acme">Open report ↗</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Northstar API</strong><span class="table-subtext">api.northstar.test</span></td>
+                    <td>Oct 13, 2026<span class="table-subtext">16:18 UTC</span></td>
+                    <td><span class="status-pill running"><span class="status-dot"></span>Running</span></td>
+                    <td><strong>03</strong><span class="table-subtext">pending triage</span></td>
+                    <td><button class="report-button muted" type="button" disabled>Not ready</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Atlas staging</strong><span class="table-subtext">staging.atlas.test</span></td>
+                    <td>Oct 12, 2026<span class="table-subtext">11:07 UTC</span></td>
+                    <td><span class="status-pill approval"><span class="status-dot"></span>Approval needed</span></td>
+                    <td><strong>01</strong><span class="table-subtext">unverified</span></td>
+                    <td><button class="report-button muted" type="button" disabled>Not ready</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Orion mobile</strong><span class="table-subtext">orion.test</span></td>
+                    <td>Oct 09, 2026<span class="table-subtext">14:26 UTC</span></td>
+                    <td><span class="status-pill complete"><span class="status-dot"></span>Completed</span></td>
+                    <td><strong>00</strong><span class="table-subtext">no findings</span></td>
+                    <td><button class="report-button" type="button" data-report="orion">Open report ↗</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel distribution-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Risk posture</span><h2>Findings summary</h2></div><button class="more-button" type="button" aria-label="More options">•••</button></div>
+            <div class="distribution-content">
+              <div class="donut-chart" aria-label="12 findings: 3 high, 5 medium, 4 low"><div><strong>12</strong><span>total</span></div></div>
+              <div class="legend">
+                <div><span class="legend-label"><i class="legend-dot critical"></i>Critical</span><strong>0</strong></div>
+                <div><span class="legend-label"><i class="legend-dot high"></i>High</span><strong>3</strong></div>
+                <div><span class="legend-label"><i class="legend-dot medium"></i>Medium</span><strong>5</strong></div>
+                <div><span class="legend-label"><i class="legend-dot low"></i>Low</span><strong>4</strong></div>
+              </div>
+            </div>
+            <div class="confidence-block"><div class="confidence-heading"><span>Confidence levels</span><span>Evidence quality</span></div><div class="confidence-bar"><span class="confirmed" style="width: 42%"></span><span class="likely" style="width: 33%"></span><span class="potential" style="width: 25%"></span></div><div class="confidence-legend"><span><i class="legend-dot confirmed"></i>Confirmed 5</span><span><i class="legend-dot likely"></i>Likely 4</span><span><i class="legend-dot potential"></i>Potential 3</span></div></div>
+          </section>
+        </div>
+
+        <div class="dashboard-grid lower-grid">
+          <section class="panel findings-panel">
+            <div class="panel-heading">
+              <div><span class="eyebrow">Evidence queue</span><h2>Findings requiring review</h2></div>
+              <a class="text-link" href="#findings">Open findings <span>→</span></a>
+            </div>
+            <div class="finding-list">
+              <button class="finding-row" type="button" data-finding="idor">
+                <span class="severity-marker high"></span><span class="finding-main"><strong>Object authorization may be bypassed</strong><small>api.acme.test /v2/profiles/{id}</small></span><span class="confidence-tag likely">Likely</span><span class="finding-owner">SK</span><span class="chevron">›</span>
+              </button>
+              <button class="finding-row" type="button" data-finding="headers">
+                <span class="severity-marker medium"></span><span class="finding-main"><strong>Missing security response headers</strong><small>app.acme.test /login</small></span><span class="confidence-tag confirmed">Confirmed</span><span class="finding-owner">MO</span><span class="chevron">›</span>
+              </button>
+              <button class="finding-row" type="button" data-finding="takeover">
+                <span class="severity-marker medium"></span><span class="finding-main"><strong>Dangling service reference detected</strong><small>old-assets.acme.test</small></span><span class="confidence-tag potential">Potential</span><span class="finding-owner">—</span><span class="chevron">›</span>
+              </button>
+            </div>
+          </section>
+
+          <section id="scope" class="panel scope-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Authorization guardrail</span><h2>Scope &amp; access</h2></div><span class="verified-label"><span class="status-dot good"></span>Verified</span></div>
+            <div class="scope-target"><div class="scope-icon">◎</div><div><strong>Acme production</strong><span>Written authorization on file</span></div></div>
+            <div class="scope-list"><div><span>Approved targets</span><strong>3 domains</strong></div><div><span>Scope last validated</span><strong>2 hours ago</strong></div><div><span>High-impact approval</span><strong class="text-warning">Required per scan</strong></div></div>
+            <div class="scope-domains"><span class="domain-chip">app.acme.test</span><span class="domain-chip">api.acme.test</span><span class="domain-chip">*.assets.acme.test</span></div>
+            <button class="button button-outline full-width" type="button">Review authorization record</button>
+          </section>
+        </div>
+
+        <section id="findings" class="panel findings-explorer">
+          <div class="panel-heading">
+            <div><span class="eyebrow">Findings register</span><h2>Search and triage findings</h2></div>
+            <span class="sample-chip compact"><span class="status-dot"></span>12 sample findings</span>
+          </div>
+          <div class="filter-bar">
+            <label class="search-field"><span>⌕</span><input id="finding-search" type="search" placeholder="Search title, asset, or endpoint" /></label>
+            <select id="severity-filter" aria-label="Filter by severity"><option value="">All severities</option><option>High</option><option>Medium</option><option>Low</option></select>
+            <select id="confidence-filter" aria-label="Filter by confidence"><option value="">All confidence</option><option>Confirmed</option><option>Likely</option><option>Potential</option></select>
+            <select id="status-filter" aria-label="Filter by status"><option value="">All statuses</option><option>New</option><option>Needs validation</option><option>Confirmed</option><option>Resolved</option></select>
+            <button class="button button-secondary" type="button" id="clear-filters">Clear filters</button>
+          </div>
+          <div class="table-wrap findings-table-wrap">
+            <table>
+              <thead><tr><th>Finding / affected asset</th><th>Severity</th><th>Confidence</th><th>Status</th><th>Evidence</th><th>Last updated</th><th>Owner</th></tr></thead>
+              <tbody id="findings-table">
+                <tr data-search="object authorization bypass api.acme.test v2 profiles" data-severity="High" data-confidence="Likely" data-status="Needs validation"><td><strong>Object authorization may be bypassed</strong><span class="table-subtext">api.acme.test /v2/profiles/{id}</span></td><td><span class="severity-badge high">High</span></td><td><span class="confidence-tag likely">Likely</span></td><td><span class="status-pill approval">Needs validation</span></td><td><span class="evidence-state available">● 2 captures</span></td><td>12 min ago</td><td><span class="owner-cell">SK</span></td></tr>
+                <tr data-search="security response headers app.acme.test login" data-severity="Medium" data-confidence="Confirmed" data-status="Confirmed"><td><strong>Missing security response headers</strong><span class="table-subtext">app.acme.test /login</span></td><td><span class="severity-badge medium">Medium</span></td><td><span class="confidence-tag confirmed">Confirmed</span></td><td><span class="status-pill complete">Confirmed</span></td><td><span class="evidence-state available">● 4 captures</span></td><td>38 min ago</td><td><span class="owner-cell">MO</span></td></tr>
+                <tr data-search="dangling service reference old assets acme" data-severity="Medium" data-confidence="Potential" data-status="New"><td><strong>Dangling service reference detected</strong><span class="table-subtext">old-assets.acme.test</span></td><td><span class="severity-badge medium">Medium</span></td><td><span class="confidence-tag potential">Potential</span></td><td><span class="status-pill running">New</span></td><td><span class="evidence-state partial">● DNS only</span></td><td>2 hrs ago</td><td><span class="owner-cell unassigned">--</span></td></tr>
+                <tr data-search="verbose server banner atlas staging" data-severity="Low" data-confidence="Confirmed" data-status="Resolved"><td><strong>Verbose server banner exposed</strong><span class="table-subtext">staging.atlas.test /</span></td><td><span class="severity-badge low">Low</span></td><td><span class="confidence-tag confirmed">Confirmed</span></td><td><span class="status-pill resolved">Resolved</span></td><td><span class="evidence-state available">● 1 capture</span></td><td>Oct 12, 2026</td><td><span class="owner-cell">AR</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer"><span id="finding-count">Showing 4 of 12 sample findings</span><button class="text-link" type="button">Load more findings →</button></div>
+        </section>
+
+        <section id="activity" class="panel activity-panel">
+          <div class="panel-heading"><div><span class="eyebrow">Audit trail</span><h2>Recent activity</h2></div><a class="text-link" href="#activity">View audit log <span>→</span></a></div>
+          <div class="activity-list">
+            <div class="activity-item"><span class="activity-icon scan">◷</span><div><strong>Assessment completed</strong><span>Acme production scan completed with 8 findings</span></div><time>12 min ago</time></div>
+            <div class="activity-item"><span class="activity-icon approval">✓</span><div><strong>Approval recorded</strong><span>Samira Khan approved Nuclei checks for Acme production</span></div><time>38 min ago</time></div>
+            <div class="activity-item"><span class="activity-icon scope">◎</span><div><strong>Scope updated</strong><span>*.assets.acme.test added to the approved target list</span></div><time>2 hrs ago</time></div>
+            <div class="activity-item"><span class="activity-icon report">▤</span><div><strong>Report generated</strong><span>Markdown and JSON reports are ready for Acme production</span></div><time>2 hrs ago</time></div>
+          </div>
+        </section>
+
+        <footer class="page-footer"><span><span class="status-dot good"></span> All systems operational</span><span>Last synced 2 minutes ago</span><span>Sample workspace - no live targets tested</span></footer>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="finding-modal" aria-hidden="true">
+      <section class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <button class="close-button" type="button" aria-label="Close finding details">×</button>
+        <div class="drawer-header"><span class="eyebrow">Finding detail · Sample record</span><span class="status-pill review"><span class="status-dot"></span>Needs validation</span></div>
+        <h2 id="detail-title">Object authorization may be bypassed</h2>
+        <p class="drawer-subtitle">API authorization observation on <strong>api.acme.test/v2/profiles/{id}</strong></p>
+        <div class="detail-alert"><strong>Evidence and validation status</strong><span>This is a likely observation, not a confirmed vulnerability. Validate only with approved test accounts and written authorization.</span></div>
+        <div class="detail-grid"><div><span class="detail-label">Severity</span><span class="severity-text high-text">High</span></div><div><span class="detail-label">Confidence</span><span class="confidence-tag likely">Likely</span></div><div><span class="detail-label">First seen</span><strong>Oct 14, 2026</strong></div><div><span class="detail-label">Owner</span><strong>Samira Khan</strong></div></div>
+        <div class="detail-section"><h3>Summary</h3><p>A tester-controlled request using a second approved account returned a profile-shaped response for an identifier created by the first account. The supplied sample evidence does not prove unauthorized access.</p></div>
+        <div class="detail-section"><h3>Evidence</h3><div class="evidence-card"><span class="evidence-icon">◇</span><div><strong>HTTP response comparison</strong><span>2 sanitized response captures · collected Oct 14, 09:51 UTC</span></div><button type="button">View</button></div></div>
+        <div class="detail-section"><h3>Recommended next step</h3><p>Repeat the comparison with two tester-controlled accounts, verify ownership boundaries, and record only redacted responses. Do not access real user data.</p></div>
+        <div class="detail-section"><h3>Review history</h3><div class="review-line"><span class="avatar small">SK</span><div><strong>Samira Khan marked as likely</strong><span>12 minutes ago · Evidence review</span></div></div></div>
+        <div class="drawer-actions"><button class="button button-secondary" type="button">Assign reviewer</button><button class="button button-primary" type="button">Start validation</button></div>
+      </section>
+    </div>
+    <div class="modal-backdrop" id="scan-modal" aria-hidden="true">
+      <section class="detail-drawer scan-drawer" role="dialog" aria-modal="true" aria-labelledby="scan-title">
+        <button class="close-button" type="button" aria-label="Close assessment details">×</button>
+        <div class="drawer-header"><span class="eyebrow">Assessment detail · Sample record</span><span class="status-pill complete"><span class="status-dot"></span>Completed</span></div>
+        <h2 id="scan-title">Acme production assessment</h2>
+        <p class="drawer-subtitle">Target <strong>app.acme.test</strong> · Completed Oct 14, 2026 at 09:42 UTC</p>
+        <div class="scan-meta-grid"><div><span>Authorized scope</span><strong>3 approved domains</strong></div><div><span>Started</span><strong>09:18 UTC</strong></div><div><span>Completed</span><strong>09:42 UTC</strong></div><div><span>Findings</span><strong>8 total · 2 high</strong></div></div>
+        <div class="detail-section"><h3>Approval history</h3><div class="approval-line"><span class="activity-icon approval">✓</span><div><strong>Nuclei checks approved by Samira Khan</strong><span>Oct 14, 09:17 UTC · Explicit high-impact approval</span></div></div></div>
+        <div class="detail-section"><h3>Tool results</h3><div class="tool-result"><span class="tool-name">subfinder</span><span class="tool-state complete">Completed</span><small>Passive subdomain discovery · 14 hosts returned</small></div><div class="tool-result"><span class="tool-name">httpx</span><span class="tool-state complete">Completed</span><small>HTTP service discovery · 9 responsive hosts</small></div><div class="tool-result"><span class="tool-name">Nuclei</span><span class="tool-state complete">Completed</span><small>Approved templates · 8 observations returned</small></div></div>
+        <div class="detail-section"><h3>AI analysis <span class="label-muted">Separate, evidence-only section</span></h3><div class="detail-alert neutral"><strong>AI-generated triage</strong><span>Analysis is based on completed tool output and is not confirmation of exploitability. Analyst validation is still required for 5 observations.</span></div></div>
+        <div class="detail-section"><h3>Reports</h3><div class="report-links"><button type="button">Markdown ↗</button><button type="button">HTML ↗</button><button type="button">JSON ↗</button></div></div>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

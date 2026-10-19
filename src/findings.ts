@@ -39,4 +39,20 @@ export class FindingStore {
       .map((file) => JSON.parse(fs.readFileSync(path.join(findingsDir, file), "utf8")) as Finding)
       .sort((a, b) => a.title.localeCompare(b.title));
   }
+
+  getFinding(id: string): Finding | undefined {
+    return this.listFindings().find((finding) => finding.id === id);
+  }
+
+  updateFinding(id: string, changes: Partial<Pick<Finding, "status" | "remediation">>): Finding {
+    const finding = this.getFinding(id);
+    if (!finding) {
+      throw new Error(`Finding '${id}' not found.`);
+    }
+    const updated = { ...finding, ...changes };
+    const findingsDir = path.join(this.getProjectDir(), "findings");
+    const filePath = safeChildPath(findingsDir, `${assertSafeName(id, "Finding ID")}.json`, "Finding ID");
+    fs.writeFileSync(filePath, JSON.stringify(updated, null, 2));
+    return updated;
+  }
 }
